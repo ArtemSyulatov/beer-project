@@ -1,0 +1,17 @@
+.navbar{
+  position: sticky;
+  width: 100vw;
+  height: 50px;
+  align-items: center;
+  background-color: lightgray;
+}
+
+.navbar__links{
+  padding: 10px;
+}
+
+.link{
+  text-decoration: none;
+  color:gray;
+  margin-right: 10px;
+}

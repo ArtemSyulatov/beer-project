@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { beerApi } from 'redux/services/BeerService';
+import { beerApi } from 'redux-toolkit/services/BeerService';
 
 const rootReducer = combineReducers({
   [beerApi.reducerPath]: beerApi.reducer,

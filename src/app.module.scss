@@ -1,5 +1,6 @@
-@import "'styles";
-@import 'styleses';
+@import 'src/styles/mixins';
+@import 'src/styles/variables';
+
 
 .container {
   max-width: 100vw;
@@ -7,4 +8,9 @@
   min-width: 375px;
   display: flex;
   flex-direction: column;
+}
+body{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
