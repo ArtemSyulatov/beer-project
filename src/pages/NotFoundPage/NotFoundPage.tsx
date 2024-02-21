@@ -1,1 +1,1 @@
-export const NotFoundPage = () => <div>Страница не найдена</div>;
+export const NotFoundPage = () => <div>404 Page Not Found</div>;

@@ -9,5 +9,10 @@ export const beerApi = createApi({
         url: '/beers',
       }),
     }),
+    getSingleBeer: build.query({
+      query: (id) => ({
+        url: `/beers/${id}`,
+      }),
+    }),
   }),
 });
