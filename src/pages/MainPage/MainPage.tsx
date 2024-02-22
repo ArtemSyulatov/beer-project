@@ -3,6 +3,7 @@ import { beerApi } from '../../redux-toolkit/services/BeerService';
 import { PageLoader } from '../../components/ui/PageLoader/PageLoader';
 import { BeerCard } from '../../components/BeerCard/BeerCard';
 import s from './MainPage.module.scss';
+import { Beer } from '../../types/Beer';
 
 const MainPage = () => {
   const { data: beers, isLoading, error } = beerApi.useGetAllBeersQuery({}); // Трансформацию данных пока не сделал, но про это знаю, сделаю чуть позже
@@ -14,8 +15,8 @@ const MainPage = () => {
   }
   return (
     <div className={s.cards}>
-      {beers.map((beer: any) => (
-        <NavLink to={`/beer/${beer.id}`}>
+      {beers.map((beer: Beer) => (
+        <NavLink key={beer.id} to={`/beer/${beer.id}`}>
           <BeerCard
             name={beer.name}
             description={beer.description}

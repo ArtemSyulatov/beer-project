@@ -4,30 +4,58 @@ import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage';
 import { BeerPage } from '../pages/BeerPage/BeerPage';
 
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
-const SomePage = lazy(() => import('pages/SomePage/SomePage'));
+const History = lazy(() => import('pages/HistoryPage/History'));
+const FavouriteBeer = lazy(() => import('pages/FavoritePage/FavouriteBeer'));
+const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
+const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
+const SearchPage = lazy(() => import('pages/SearchPage/SearchPage'));
 
 export enum AppRoutes {
   MAIN = 'main',
-  SOME = 'some',
+  HISTORY = 'history',
   NOT_FOUND = 'not_found',
   BEER_PAGE = 'beer_page',
+  FAVOURITE_BEER = 'favourite_beer',
+  SIGN_IN = 'signin',
+  SIGN_UP = 'signup',
+  SEACH_PAGE = 'search',
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: '/',
-  [AppRoutes.SOME]: '/some',
+  [AppRoutes.HISTORY]: '/history',
   [AppRoutes.NOT_FOUND]: '*',
   [AppRoutes.BEER_PAGE]: '/beer/:id',
+  [AppRoutes.FAVOURITE_BEER]: '/favorites',
+  [AppRoutes.SIGN_IN]: '/signin',
+  [AppRoutes.SIGN_UP]: '/signup',
+  [AppRoutes.SEACH_PAGE]: '/search',
 };
 
-export const routeConfig: Record<AppRoutes, RouteProps> = {
+export const publicRouteConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.MAIN]: {
     path: RoutePath.main,
     element: <MainPage />,
   },
-  [AppRoutes.SOME]: {
-    path: RoutePath.some,
-    element: <SomePage />,
+  [AppRoutes.SEACH_PAGE]: {
+    path: RoutePath.search,
+    element: <SearchPage />,
+  },
+  [AppRoutes.SIGN_UP]: {
+    path: RoutePath.signup,
+    element: <SignUpPage />,
+  },
+  [AppRoutes.SIGN_IN]: {
+    path: RoutePath.signin,
+    element: <SignInPage />,
+  },
+  [AppRoutes.FAVOURITE_BEER]: {
+    path: RoutePath.favourite_beer,
+    element: <FavouriteBeer />,
+  },
+  [AppRoutes.HISTORY]: {
+    path: RoutePath.history,
+    element: <History />,
   },
   [AppRoutes.NOT_FOUND]: {
     path: RoutePath.not_found,
