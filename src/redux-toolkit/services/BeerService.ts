@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const beerApi = createApi({
   reducerPath: 'beer',
@@ -7,6 +7,11 @@ export const beerApi = createApi({
     getAllBeers: build.query({
       query: () => ({
         url: '/beers',
+      }),
+    }),
+    getSingleBeer: build.query({
+      query: (id) => ({
+        url: `/beers/${id}`,
       }),
     }),
   }),
