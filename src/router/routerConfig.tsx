@@ -2,6 +2,7 @@ import { RouteProps } from 'react-router-dom';
 import { lazy } from 'react';
 import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage';
 import { BeerPage } from '../pages/BeerPage/BeerPage';
+import ProtectedRoute from './ProtectedRoute';
 
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const History = lazy(() => import('pages/HistoryPage/History'));
@@ -9,7 +10,6 @@ const FavouriteBeer = lazy(() => import('pages/FavoritePage/FavouriteBeer'));
 const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const SearchPage = lazy(() => import('pages/SearchPage/SearchPage'));
-
 export enum AppRoutes {
   MAIN = 'main',
   HISTORY = 'history',
@@ -51,11 +51,19 @@ export const publicRouteConfig: Record<AppRoutes, RouteProps> = {
   },
   [AppRoutes.FAVOURITE_BEER]: {
     path: RoutePath.favourite_beer,
-    element: <FavouriteBeer />,
+    element: (
+      <ProtectedRoute>
+        <FavouriteBeer />
+      </ProtectedRoute>
+    ),
   },
   [AppRoutes.HISTORY]: {
     path: RoutePath.history,
-    element: <History />,
+    element: (
+      <ProtectedRoute>
+        <History />
+      </ProtectedRoute>
+    ),
   },
   [AppRoutes.NOT_FOUND]: {
     path: RoutePath.not_found,
