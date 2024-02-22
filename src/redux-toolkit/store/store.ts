@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { beerApi } from 'redux-toolkit/services/BeerService';
+import { isAuth } from '../reducers/isAuthSlice';
 
 const rootReducer = combineReducers({
   [beerApi.reducerPath]: beerApi.reducer,
+  auth: isAuth.reducer,
 });
 
 export const store = configureStore({

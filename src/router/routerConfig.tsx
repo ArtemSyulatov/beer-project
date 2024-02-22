@@ -18,7 +18,7 @@ export enum AppRoutes {
   FAVOURITE_BEER = 'favourite_beer',
   SIGN_IN = 'signin',
   SIGN_UP = 'signup',
-  SEACH_PAGE = 'search',
+  SEARCH_PAGE = 'search',
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
@@ -29,7 +29,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.FAVOURITE_BEER]: '/favorites',
   [AppRoutes.SIGN_IN]: '/signin',
   [AppRoutes.SIGN_UP]: '/signup',
-  [AppRoutes.SEACH_PAGE]: '/search',
+  [AppRoutes.SEARCH_PAGE]: '/search',
 };
 
 export const publicRouteConfig: Record<AppRoutes, RouteProps> = {
@@ -37,7 +37,7 @@ export const publicRouteConfig: Record<AppRoutes, RouteProps> = {
     path: RoutePath.main,
     element: <MainPage />,
   },
-  [AppRoutes.SEACH_PAGE]: {
+  [AppRoutes.SEARCH_PAGE]: {
     path: RoutePath.search,
     element: <SearchPage />,
   },
