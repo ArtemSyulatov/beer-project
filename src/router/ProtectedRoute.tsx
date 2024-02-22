@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom';
+import React from 'react';
 import { useAppSelector } from '../hooks/redux';
 
 interface Props {
@@ -7,8 +8,6 @@ interface Props {
 
 const ProtectedRoute = ({ children }: Props) => {
   const isAuth = useAppSelector((state) => state.auth.auth);
-  // const location = useLocation();
-
   if (!isAuth) {
     return <Navigate to="/signin" replace />;
   }

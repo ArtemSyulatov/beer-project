@@ -3,6 +3,7 @@ import s from './NavBar.module.scss';
 import logo from '../../assets/imgs/beer-logo2.png';
 import { isAuth } from '../../redux-toolkit/reducers/isAuthSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { Button } from '../ui/Button/Button';
 
 export const NavBar = () => {
   const dispatch = useAppDispatch();
@@ -17,27 +18,35 @@ export const NavBar = () => {
         <div>
           {isAuthNow ? (
             <div>
-              <button onClick={() => dispatch(logout(false))} type="button">
+              <Button onClick={() => dispatch(logout(false))} type="button">
                 Logout
-              </button>
-              <NavLink className={s.link} to="/history">
-                History
-              </NavLink>
-              <NavLink className={s.link} to="/favorites">
-                Favorites beers
-              </NavLink>
+              </Button>
+              <Button>
+                <NavLink className={s.link} to="/history">
+                  History
+                </NavLink>
+              </Button>
+              <Button>
+                <NavLink className={s.link} to="/favorites">
+                  Favorites beers
+                </NavLink>
+              </Button>
             </div>
           ) : (
             <div>
-              <button onClick={() => dispatch(login(true))} type="button">
+              <Button onClick={() => dispatch(login(true))} type="button">
                 Login
-              </button>
-              <NavLink className={s.link} to="/signup">
-                Sign up
-              </NavLink>
-              <NavLink className={s.link} to="/signin">
-                Sign in
-              </NavLink>
+              </Button>
+              <Button>
+                <NavLink className={s.link} to="/signup">
+                  Sign up
+                </NavLink>
+              </Button>
+              <Button>
+                <NavLink className={s.link} to="/signin">
+                  Sign in
+                </NavLink>
+              </Button>
             </div>
           )}
         </div>
