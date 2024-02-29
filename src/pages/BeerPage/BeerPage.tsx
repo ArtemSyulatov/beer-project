@@ -17,9 +17,9 @@ export const BeerPage = () => {
   }
   return (
     <div>
-      <h2>{beer[0].name}</h2>
-      <img src={beer[0].image_url} alt="" />
-      <p>{beer[0].description}</p>
+      <h2>{beer.name}</h2>
+      <img src={beer.imageUrl} alt="" />
+      <p>{beer.description}</p>
     </div>
   );
 };

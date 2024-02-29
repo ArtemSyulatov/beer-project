@@ -4,3 +4,10 @@ export interface Beer {
   id: number;
   image_url: string;
 }
+
+export interface TransformedBeer {
+  name: string;
+  description: string;
+  id: number;
+  imageUrl: string;
+}

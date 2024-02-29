@@ -4,7 +4,7 @@ import { beerApi } from '../../redux-toolkit/services/BeerService';
 import { PageLoader } from '../../components/ui/PageLoader/PageLoader';
 import { BeerCard } from '../../components/BeerCard/BeerCard';
 import s from './MainPage.module.scss';
-import { Beer } from '../../types/Beer';
+import { TransformedBeer } from '../../types/Beer';
 
 const MainPage = () => {
   const [perPage, setPerPage] = useState(10);
@@ -21,12 +21,12 @@ const MainPage = () => {
   }
   return (
     <div className={s.cards}>
-      {beers.map((beer: Beer) => (
+      {beers.map((beer: TransformedBeer) => (
         <NavLink key={beer.id} to={`/beer/${beer.id}`}>
           <BeerCard
             name={beer.name}
             description={beer.description}
-            image_url={beer.image_url}
+            image_url={beer.imageUrl}
             id={beer.id}
           />
         </NavLink>
