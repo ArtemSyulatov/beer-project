@@ -1,30 +1,44 @@
-import { NavLink } from 'react-router-dom';
 import { beerApi } from '../../redux-toolkit/services/BeerService';
-import { PageLoader } from '../../components/ui/PageLoader/PageLoader';
 import { BeerCard } from '../../components/BeerCard/BeerCard';
 import s from './MainPage.module.scss';
-import { Beer } from '../../types/Beer';
+import { TransformedBeer } from '../../types/Beer';
+import { Button } from '../../components/ui/Button/Button';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { beerSlice } from '../../redux-toolkit/reducers/beerSlice';
+import { Loader } from '../../components/ui/Loader/Loader';
 
 const MainPage = () => {
-  const { data: beers, isLoading, error } = beerApi.useGetAllBeersQuery({}); // Трансформацию данных пока не сделал, но про это знаю, сделаю чуть позже
-  if (isLoading) {
-    return <PageLoader />;
-  }
-  if (error) {
-    return <div>Ошибка</div>;
+  const { perPage } = useAppSelector((state) => state.beerSlice);
+  const dispatch = useAppDispatch();
+  const { setPerPage } = beerSlice.actions;
+  const {
+    data: beers,
+    isLoading,
+    error,
+  } = beerApi.useGetAllBeersQuery({
+    per_page: perPage,
+    beer_name: '',
+  });
+  const downloadMore = () => {
+    dispatch(setPerPage({ perPage: perPage + 10 }));
+  };
+  if (isLoading || !beers) {
+    return <Loader />;
   }
   return (
     <div className={s.cards}>
-      {beers.map((beer: Beer) => (
-        <NavLink key={beer.id} to={`/beer/${beer.id}`}>
-          <BeerCard
-            name={beer.name}
-            description={beer.description}
-            image_url={beer.image_url}
-            id={beer.id}
-          />
-        </NavLink>
+      {beers.map((beer: TransformedBeer) => (
+        <BeerCard
+          key={beer.id}
+          name={beer.name}
+          description={beer.description}
+          image_url={beer.imageUrl}
+          id={beer.id}
+        />
       ))}
+      <Button disabled={!!error} onClick={downloadMore}>
+        {error ? <p>Beer is out</p> : <p>Загрузить еще</p>}
+      </Button>
     </div>
   );
 };

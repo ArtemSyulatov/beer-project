@@ -1,0 +1,17 @@
+.suggest {
+  position: absolute;
+  width: 300px;
+  max-height: 200px;
+  overflow: auto;
+  background-color: white;
+  border: 1px solid black;
+}
+.link {
+  text-decoration: none;
+  color: black;
+  padding: 12px 8px;
+  display: block;
+}
+.link:hover {
+  background-color: #f3f3f3;
+}

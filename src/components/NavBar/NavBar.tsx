@@ -3,6 +3,8 @@ import s from './NavBar.module.scss';
 import logo from '../../assets/imgs/beer-logo2.png';
 import { isAuth } from '../../redux-toolkit/reducers/isAuthSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { Button } from '../ui/Button/Button';
+import { SearchBar } from '../SearchBar/SearchBar';
 
 export const NavBar = () => {
   const dispatch = useAppDispatch();
@@ -14,12 +16,15 @@ export const NavBar = () => {
         <NavLink to="/">
           <img className={s.logo} src={logo} alt="beer-logo" />
         </NavLink>
+        <div className={s.searchWidget}>
+          <SearchBar />
+        </div>
         <div>
           {isAuthNow ? (
             <div>
-              <button onClick={() => dispatch(logout(false))} type="button">
+              <Button onClick={() => dispatch(logout(false))} type="button">
                 Logout
-              </button>
+              </Button>
               <NavLink className={s.link} to="/history">
                 History
               </NavLink>
@@ -29,9 +34,9 @@ export const NavBar = () => {
             </div>
           ) : (
             <div>
-              <button onClick={() => dispatch(login(true))} type="button">
+              <Button onClick={() => dispatch(login(true))} type="button">
                 Login
-              </button>
+              </Button>
               <NavLink className={s.link} to="/signup">
                 Sign up
               </NavLink>

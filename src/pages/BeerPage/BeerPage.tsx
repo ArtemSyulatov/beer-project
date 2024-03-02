@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { beerApi } from '../../redux-toolkit/services/BeerService';
-import { PageLoader } from '../../components/ui/PageLoader/PageLoader';
+import s from './BeerPage.module.scss';
+import { Loader } from '../../components/ui/Loader/Loader';
 
 export const BeerPage = () => {
   const params = useParams();
@@ -10,16 +11,16 @@ export const BeerPage = () => {
     error,
   } = beerApi.useGetSingleBeerQuery(params.id);
   if (isLoading) {
-    return <PageLoader />;
+    return <Loader />;
   }
   if (error) {
     return <div>Ошибка</div>;
   }
   return (
-    <div>
-      <h2>{beer[0].name}</h2>
-      <img src={beer[0].image_url} alt="" />
-      <p>{beer[0].description}</p>
+    <div className={s.card}>
+      <h2>{beer.name}</h2>
+      <img src={beer.imageUrl} alt="" />
+      <p>{beer.description}</p>
     </div>
   );
 };

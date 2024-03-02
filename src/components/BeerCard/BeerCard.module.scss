@@ -9,7 +9,8 @@
 }
 .card img {
   height: 200px;
-  width: 80px;
+  width: 70px;
+  object-fit: contain;
 }
 .card p {
   max-width: 500px;
