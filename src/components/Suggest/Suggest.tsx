@@ -9,12 +9,16 @@ interface Props {
 }
 
 export const Suggest = ({ value, setValueDefault }: Props) => {
-  const { data: beers } = beerApi.useGetAllBeersQuery({
+  const { data: beers, isLoading } = beerApi.useGetAllBeersQuery({
     per_page: 5,
     beer_name: value,
   });
-  if (!value) {
-    return <Loader />;
+  if (!value || isLoading) {
+    return (
+      <div className={s.suggest}>
+        <Loader />
+      </div>
+    );
   }
   return (
     <div className={s.suggest}>
