@@ -8,6 +8,7 @@ export function transformBeer(beer: Beer[]): TransformedBeer[] {
       description: beer[i].description,
       id: beer[i].id,
       imageUrl: beer[i].image_url,
+      key: beer[i].id,
     });
   }
   return res;

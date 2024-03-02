@@ -64,3 +64,10 @@
     transform: translate(24px, 0);
   }
 }
+.containerLoader {
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}

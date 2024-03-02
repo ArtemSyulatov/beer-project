@@ -10,4 +10,5 @@ export interface TransformedBeer {
   description: string;
   id: number;
   imageUrl: string;
+  key: number;
 }

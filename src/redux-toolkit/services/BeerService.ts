@@ -6,15 +6,18 @@ export const beerApi = createApi({
   reducerPath: 'beer',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.punkapi.com/v2' }),
   endpoints: (build) => ({
-    getAllBeers: build.query<TransformedBeer[], { per_page: number }>({
-      query: (per_page) => ({
+    getAllBeers: build.query<
+      TransformedBeer[],
+      { per_page: number; beer_name?: string }
+    >({
+      query: ({ per_page, beer_name }) => ({
         url: '/beers',
-        params: per_page,
+        params: { per_page, beer_name: beer_name || undefined },
       }),
       transformResponse: (response: Beer[]): TransformedBeer[] =>
         transformBeer(response),
     }),
-    getSingleBeer: build.query({
+    getSingleBeer: build.query<TransformedBeer, string>({
       query: (id) => ({
         url: `/beers/${id}`,
       }),
