@@ -1,9 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-const isAuth = (state: RootState) => state.auth;
+const isAuthSelector = (state: RootState) => state.auth;
 
-export const isAuthSelector = createSelector(
-  [isAuth],
+export const getIsAuth = createSelector(
+  [isAuthSelector],
   (authState) => authState.auth,
 );
