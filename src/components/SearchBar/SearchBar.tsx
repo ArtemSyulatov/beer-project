@@ -20,7 +20,7 @@ export const SearchBar = () => {
       navigate(`/search?beer_name=${value}`);
     }
   };
-  const debounceValue = useDebounce(value, 3000);
+  const debounceValue = useDebounce(value, 500);
   const setValueDefault = () => {
     setValue('');
   };
