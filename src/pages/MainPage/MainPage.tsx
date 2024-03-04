@@ -37,7 +37,7 @@ const MainPage = () => {
         />
       ))}
       <Button disabled={!!error} onClick={downloadMore}>
-        {error ? <p>Beer is out</p> : <p>Загрузить еще</p>}
+        {error ? <p>Beer is out</p> : <p>More..</p>}
       </Button>
     </div>
   );

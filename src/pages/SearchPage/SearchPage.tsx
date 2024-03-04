@@ -15,18 +15,20 @@ const SearchPage = () => {
   if (isLoading) {
     return <Loader />;
   }
+  if (beers.length === 0) {
+    return <h4>Ничего не найдено</h4>;
+  }
   return (
     <div className={s.cards}>
-      {beers &&
-        beers.map((beer: TransformedBeer) => (
-          <BeerCard
-            key={beer.id}
-            name={beer.name}
-            description={beer.description}
-            image_url={beer.imageUrl}
-            id={beer.id}
-          />
-        ))}
+      {beers.map((beer: TransformedBeer) => (
+        <BeerCard
+          key={beer.id}
+          name={beer.name}
+          description={beer.description}
+          image_url={beer.imageUrl}
+          id={beer.id}
+        />
+      ))}
     </div>
   );
 };

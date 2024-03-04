@@ -20,6 +20,13 @@ export const Suggest = ({ value, setValueDefault }: Props) => {
       </div>
     );
   }
+  if (beers.length === 0) {
+    return (
+      <div className={s.suggest}>
+        <h4>Ничего не найдено</h4>
+      </div>
+    );
+  }
   return (
     <div className={s.suggest}>
       {beers.map((beer) => (

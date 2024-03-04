@@ -17,6 +17,11 @@
   text-decoration: none;
   color: black;
   margin-right: 10px;
+  border: 1px solid black;
+  padding: 5px;
+}
+.link:hover {
+  color: gray;
 }
 .logo {
   margin-top: 20px;
