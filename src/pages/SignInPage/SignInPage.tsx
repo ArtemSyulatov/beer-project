@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
@@ -6,11 +6,11 @@ import { useAppDispatch } from '../../hooks/redux';
 import { isAuth } from '../../redux-toolkit/reducers/isAuthSlice';
 import { Input } from '../../components/ui/Input/Input';
 import { Button } from '../../components/ui/Button/Button';
+import { useAuthData } from '../../hooks/useAuthData';
 
 const SignInPage = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { email, password, setPassword, setEmail } = useAuthData();
   const dispatch = useAppDispatch();
   const { login } = isAuth.actions;
   const onLogin = (e: FormEvent<HTMLFormElement>) => {
@@ -54,7 +54,7 @@ const SignInPage = () => {
           <Button>Sign in</Button>
         </div>
       </form>
-      <p className="text-sm text-white text-center">
+      <p>
         Нет аккаунта? <NavLink to="/signup">Sign up</NavLink>
       </p>
     </div>

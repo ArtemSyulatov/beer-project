@@ -1,13 +1,12 @@
-import { useLocation } from 'react-router-dom';
 import { TransformedBeer } from '../../types/Beer';
 import { BeerCard } from '../../components/BeerCard/BeerCard';
 import { beerApi } from '../../redux-toolkit/services/BeerService';
 import s from './SearchPage.module.scss';
 import { Loader } from '../../components/ui/Loader/Loader';
+import { useQueryParams } from '../../hooks/useQueryParams';
 
 const SearchPage = () => {
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
+  const params = useQueryParams();
   const { data: beers, isLoading } = beerApi.useGetAllBeersQuery({
     per_page: 5,
     beer_name: params.get('beer_name'),

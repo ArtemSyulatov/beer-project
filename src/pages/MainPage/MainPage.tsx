@@ -6,9 +6,10 @@ import { Button } from '../../components/ui/Button/Button';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { beerSlice } from '../../redux-toolkit/reducers/beerSlice';
 import { Loader } from '../../components/ui/Loader/Loader';
+import { beerSelector } from '../../redux-toolkit/selectors/beerSelector';
 
 const MainPage = () => {
-  const { perPage } = useAppSelector((state) => state.beerSlice);
+  const perPage = useAppSelector(beerSelector);
   const dispatch = useAppDispatch();
   const { setPerPage } = beerSlice.actions;
   const {

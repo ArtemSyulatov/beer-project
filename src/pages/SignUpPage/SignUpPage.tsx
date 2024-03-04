@@ -1,16 +1,14 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { Input } from '../../components/ui/Input/Input';
 import { Button } from '../../components/ui/Button/Button';
+import { useAuthData } from '../../hooks/useAuthData';
 
 const SignupPage = () => {
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
+  const { email, password, setPassword, setEmail } = useAuthData();
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await createUserWithEmailAndPassword(auth, email, password)

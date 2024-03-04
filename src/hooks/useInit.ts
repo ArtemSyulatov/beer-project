@@ -3,11 +3,12 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useAppDispatch, useAppSelector } from './redux';
 import { isAuth } from '../redux-toolkit/reducers/isAuthSlice';
 import { auth } from '../firebase';
+import { isInitializesSuccess } from '../redux-toolkit/selectors/initSelector';
 
 export const useInit = () => {
   const dispatch = useAppDispatch();
   const { initialize, login } = isAuth.actions;
-  const { initializeSuccess } = useAppSelector((state) => state.auth);
+  const initializeSuccess = useAppSelector(isInitializesSuccess);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {

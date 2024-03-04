@@ -7,10 +7,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Button } from '../ui/Button/Button';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { auth } from '../../firebase';
+import { isAuthSelector } from '../../redux-toolkit/selectors/isAuthSelector';
 
 export const NavBar = () => {
   const dispatch = useAppDispatch();
-  const isAuthNow = useAppSelector((state) => state.auth.auth);
+  const isAuthNow = useAppSelector(isAuthSelector);
   const { login } = isAuth.actions;
   const navigate = useNavigate();
   const handleLogout = () => {

@@ -1,19 +1,15 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '../ui/Input/Input';
 import { Button } from '../ui/Button/Button';
 import s from './SearchBar.module.scss';
 import { Suggest } from '../Suggest/Suggest';
 import { useDebounce } from '../../hooks/useDebounce';
+import { useFocusInput } from '../../hooks/useFocusInput';
 
 export const SearchBar = () => {
   const navigate = useNavigate();
-  const [value, setValue] = useState('');
-  const [isFocus, setIsFocus] = useState(false);
-
-  const onChange = (e: FormEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value);
-  };
+  const { value, setValue, setIsFocus, isFocus, onChange } = useFocusInput();
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (value) {
@@ -22,9 +18,6 @@ export const SearchBar = () => {
     }
   };
   const debounceValue = useDebounce(value, 500);
-  const setValueDefault = () => {
-    setValue('');
-  };
   return (
     <div>
       <div className={s.search}>
@@ -39,7 +32,7 @@ export const SearchBar = () => {
         </form>
       </div>
       {isFocus && value && (
-        <Suggest setValueDefault={setValueDefault} value={debounceValue} />
+        <Suggest setValueDefault={() => setValue('')} value={debounceValue} />
       )}
     </div>
   );
