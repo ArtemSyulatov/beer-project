@@ -1,15 +1,29 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
 import s from './NavBar.module.scss';
 import logo from '../../assets/imgs/beer-logo2.png';
 import { isAuth } from '../../redux-toolkit/reducers/isAuthSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Button } from '../ui/Button/Button';
 import { SearchBar } from '../SearchBar/SearchBar';
+import { auth } from '../../firebase';
 
 export const NavBar = () => {
   const dispatch = useAppDispatch();
   const isAuthNow = useAppSelector((state) => state.auth.auth);
-  const { login, logout } = isAuth.actions;
+  const { login } = isAuth.actions;
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate('/');
+        dispatch(login(false));
+        console.log('Signed out successfully');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <header className={s.navbar}>
       <div className={s.navbar__links}>
@@ -21,22 +35,21 @@ export const NavBar = () => {
         </div>
         <div>
           {isAuthNow ? (
-            <div>
-              <Button onClick={() => dispatch(logout(false))} type="button">
+            <div className={s.rightSide}>
+              <div>
+                <NavLink className={s.link} to="/history">
+                  History
+                </NavLink>
+                <NavLink className={s.link} to="/favorites">
+                  Favorites beers
+                </NavLink>
+              </div>
+              <Button onClick={handleLogout} type="button">
                 Logout
               </Button>
-              <NavLink className={s.link} to="/history">
-                History
-              </NavLink>
-              <NavLink className={s.link} to="/favorites">
-                Favorites beers
-              </NavLink>
             </div>
           ) : (
             <div>
-              <Button onClick={() => dispatch(login(true))} type="button">
-                Login
-              </Button>
               <NavLink className={s.link} to="/signup">
                 Sign up
               </NavLink>

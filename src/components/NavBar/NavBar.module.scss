@@ -27,3 +27,10 @@
 .searchWidget {
   width: 200px;
 }
+.rightSide {
+  display: flex;
+  align-items: center;
+}
+.rightSide button {
+  margin-left: 20px;
+}
