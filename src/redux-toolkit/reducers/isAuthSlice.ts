@@ -17,4 +17,3 @@ export const isAuth = createSlice({
 });
 
 export const { login, initialize } = isAuth.actions;
-export default isAuth.reducer;

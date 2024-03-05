@@ -30,4 +30,3 @@ export const beerSlice = createSlice({
 });
 
 export const { setSearchValue } = beerSlice.actions;
-export default beerSlice.reducer;

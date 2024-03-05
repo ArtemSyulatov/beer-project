@@ -33,7 +33,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.SEARCH_PAGE]: '/search',
 };
 
-export const publicRouteConfig: Record<AppRoutes, RouteProps> = {
+export const routeConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.MAIN]: {
     path: RoutePath.main,
     element: <MainPage />,
