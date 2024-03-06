@@ -6,14 +6,18 @@ import s from './SearchBar.module.scss';
 import { Suggest } from '../Suggest/Suggest';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useFocusInput } from '../../hooks/useFocusInput';
+import { useHistory } from '../../hooks/useHistory';
 
 export const SearchBar = () => {
   const navigate = useNavigate();
   const { value, setValue, setIsFocus, isFocus, onChange } = useFocusInput();
+  const { addHistory } = useHistory();
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (value) {
       setValue('');
+      const date = new Date().toJSON();
+      addHistory({ date, name: value });
       navigate(`/search?beer_name=${value}`);
     }
   };

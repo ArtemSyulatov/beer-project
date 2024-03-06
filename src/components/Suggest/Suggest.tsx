@@ -23,7 +23,7 @@ export const Suggest = ({ value, setValueDefault }: Props) => {
   if (beers.length === 0) {
     return (
       <div className={s.suggest}>
-        <h4>Ничего не найдено</h4>
+        <h4>Found Nothing...</h4>
       </div>
     );
   }

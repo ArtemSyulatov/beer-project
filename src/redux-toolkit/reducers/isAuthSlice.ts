@@ -7,7 +7,7 @@ export const isAuth = createSlice({
     initializeSuccess: false,
   },
   reducers: {
-    login(state, { payload: auth }: PayloadAction<boolean>) {
+    toggleAuth(state, { payload: auth }: PayloadAction<boolean>) {
       state.auth = auth;
     },
     initialize(state, { payload: initializeSuccess }: PayloadAction<boolean>) {
@@ -16,4 +16,4 @@ export const isAuth = createSlice({
   },
 });
 
-export const { login, initialize } = isAuth.actions;
+export const { toggleAuth, initialize } = isAuth.actions;

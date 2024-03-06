@@ -4,22 +4,23 @@ import { useAppDispatch, useAppSelector } from './redux';
 import { isAuth } from '../redux-toolkit/reducers/isAuthSlice';
 import { auth } from '../firebase';
 import { isInitializesSuccess } from '../redux-toolkit/selectors/initSelector';
+import { clearUser, setUser } from '../redux-toolkit/reducers/userSlice';
 
 export const useInit = () => {
   const dispatch = useAppDispatch();
-  const { initialize, login } = isAuth.actions;
+  const { initialize, toggleAuth } = isAuth.actions;
   const initializeSuccess = useAppSelector(isInitializesSuccess);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const { uid } = user;
-        dispatch(login(true));
-        console.log('uid', uid);
+        dispatch(toggleAuth(true));
+        const userData = { uid: user.uid, email: user.email };
+        dispatch(setUser(userData));
       } else {
-        console.log('user is logged out');
+        dispatch(clearUser());
       }
       dispatch(initialize(true));
     });
-  }, [dispatch, initialize, login]);
+  }, [dispatch, initialize, toggleAuth]);
   return initializeSuccess;
 };

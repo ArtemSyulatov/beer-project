@@ -1,32 +1,33 @@
 import React, { FormEvent } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase';
+import toast from 'react-hot-toast';
 import { useAppDispatch } from '../../hooks/redux';
 import { isAuth } from '../../redux-toolkit/reducers/isAuthSlice';
 import { Input } from '../../components/ui/Input/Input';
 import { Button } from '../../components/ui/Button/Button';
-import { useAuthData } from '../../hooks/useAuthData';
+import { useInputData } from '../../hooks/useInputData';
+import { useAuthActions } from '../../hooks/useAuthActions';
 
 const SignInPage = () => {
   const navigate = useNavigate();
-  const { email, password, setPassword, setEmail } = useAuthData();
+  const { email, password, setPassword, setEmail } = useInputData();
   const dispatch = useAppDispatch();
-  const { login } = isAuth.actions;
-  const onLogin = (e: FormEvent<HTMLFormElement>) => {
+  const { toggleAuth } = isAuth.actions;
+  const { login } = useAuthActions();
+  const { initialize } = isAuth.actions;
+  const onLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        dispatch(login(true));
+    dispatch(initialize(false));
+    const user = await login(email, password);
+    try {
+      if (user) {
         navigate('/');
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
+        dispatch(toggleAuth(true));
+      }
+    } catch (error) {
+      toast.error(error);
+    }
+    dispatch(initialize(true));
   };
   return (
     <div className="form">

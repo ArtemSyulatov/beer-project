@@ -14,7 +14,7 @@ export const BeerPage = () => {
     return <Loader />;
   }
   if (error) {
-    return <div>Ошибка</div>;
+    return <div>Error..</div>;
   }
   return (
     <div className={s.card}>

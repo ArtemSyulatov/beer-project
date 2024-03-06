@@ -6,7 +6,7 @@ import ProtectedRoute from './ProtectedRoute';
 import ProtectedRouteAuth from './ProtectedRouteAuth';
 
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
-const History = lazy(() => import('pages/HistoryPage/History'));
+const History = lazy(() => import('pages/SearchHistoryPage/SearchHistoryPage'));
 const FavouriteBeer = lazy(() => import('pages/FavoritePage/FavouriteBeer'));
 const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
