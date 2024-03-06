@@ -1,29 +1,23 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase';
 import { Input } from '../../components/ui/Input/Input';
 import { Button } from '../../components/ui/Button/Button';
+import { useInputData } from '../../hooks/useInputData';
+import { useAuthActions } from '../../hooks/useAuthActions';
+import { useAppSelector } from '../../hooks/redux';
+import { selectUser } from '../../redux-toolkit/selectors/getUser';
 
 const SignupPage = () => {
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
+  const { email, password, setPassword, setEmail } = useInputData();
+  const { register } = useAuthActions();
+  const user = useAppSelector(selectUser);
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        console.log(user);
-        navigate('/');
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
+    register(email, password);
+    if (user) {
+      navigate('/signin');
+    }
   };
   return (
     <div className="form">

@@ -15,3 +15,26 @@
 .card p {
   max-width: 500px;
 }
+
+.card a {
+  text-decoration: none;
+  color: black;
+  border: 1px solid black;
+  padding: 5px;
+}
+.card a:hover {
+  color: gray;
+}
+
+.card button {
+  margin-left: 5px;
+}
+.name {
+  max-width: 100px;
+}
+.buttons {
+  display: flex;
+  height: 28px;
+  width: 250px;
+  justify-content: center;
+}

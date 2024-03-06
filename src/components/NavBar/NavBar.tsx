@@ -1,29 +1,25 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { signOut } from 'firebase/auth';
+import { useCallback } from 'react';
 import s from './NavBar.module.scss';
 import logo from '../../assets/imgs/beer-logo2.png';
 import { isAuth } from '../../redux-toolkit/reducers/isAuthSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Button } from '../ui/Button/Button';
 import { SearchBar } from '../SearchBar/SearchBar';
-import { auth } from '../../firebase';
+import { getIsAuth } from '../../redux-toolkit/selectors/getIsAuth';
+import { useAuthActions } from '../../hooks/useAuthActions';
 
 export const NavBar = () => {
   const dispatch = useAppDispatch();
-  const isAuthNow = useAppSelector((state) => state.auth.auth);
-  const { login } = isAuth.actions;
+  const isAuthNow = useAppSelector(getIsAuth);
+  const { toggleAuth } = isAuth.actions;
   const navigate = useNavigate();
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        navigate('/');
-        dispatch(login(false));
-        console.log('Signed out successfully');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const { logout } = useAuthActions();
+  const handleLogout = useCallback(() => {
+    logout();
+    navigate('/');
+    dispatch(toggleAuth(false));
+  }, [dispatch, logout, navigate, toggleAuth]);
   return (
     <header className={s.navbar}>
       <div className={s.navbar__links}>

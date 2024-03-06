@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from 'App';
 import { store } from 'redux-toolkit/store';
+import { Toaster } from 'react-hot-toast';
 import ErrorBoundary from './providers/ErrorBoundary/ErrorBoundary';
 import './index.scss';
 
@@ -16,6 +17,7 @@ root.render(
       <ErrorBoundary>
         <BrowserRouter>
           <App />
+          <Toaster />
         </BrowserRouter>
       </ErrorBoundary>
     </Provider>

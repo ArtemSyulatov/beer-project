@@ -1,15 +1,17 @@
 import { RouteProps } from 'react-router-dom';
 import { lazy } from 'react';
 import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage';
-import { BeerPage } from '../pages/BeerPage/BeerPage';
 import ProtectedRoute from './ProtectedRoute';
+import ProtectedRouteAuth from './ProtectedRouteAuth';
 
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
-const History = lazy(() => import('pages/HistoryPage/History'));
+const History = lazy(() => import('pages/SearchHistoryPage/SearchHistoryPage'));
 const FavouriteBeer = lazy(() => import('pages/FavoritePage/FavouriteBeer'));
 const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const SearchPage = lazy(() => import('pages/SearchPage/SearchPage'));
+const BeerPage = lazy(() => import('pages/BeerPage/BeerPage'));
+
 export enum AppRoutes {
   MAIN = 'main',
   HISTORY = 'history',
@@ -32,7 +34,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.SEARCH_PAGE]: '/search',
 };
 
-export const publicRouteConfig: Record<AppRoutes, RouteProps> = {
+export const routeConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.MAIN]: {
     path: RoutePath.main,
     element: <MainPage />,
@@ -43,11 +45,19 @@ export const publicRouteConfig: Record<AppRoutes, RouteProps> = {
   },
   [AppRoutes.SIGN_UP]: {
     path: RoutePath.signup,
-    element: <SignUpPage />,
+    element: (
+      <ProtectedRouteAuth>
+        <SignUpPage />
+      </ProtectedRouteAuth>
+    ),
   },
   [AppRoutes.SIGN_IN]: {
     path: RoutePath.signin,
-    element: <SignInPage />,
+    element: (
+      <ProtectedRouteAuth>
+        <SignInPage />
+      </ProtectedRouteAuth>
+    ),
   },
   [AppRoutes.FAVOURITE_BEER]: {
     path: RoutePath.favourite_beer,

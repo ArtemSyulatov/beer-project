@@ -1,29 +1,27 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '../ui/Input/Input';
 import { Button } from '../ui/Button/Button';
 import s from './SearchBar.module.scss';
 import { Suggest } from '../Suggest/Suggest';
 import { useDebounce } from '../../hooks/useDebounce';
+import { useFocusInput } from '../../hooks/useFocusInput';
+import { useHistory } from '../../hooks/useHistory';
 
 export const SearchBar = () => {
   const navigate = useNavigate();
-  const [value, setValue] = useState('');
-  const [isFocus, setIsFocus] = useState(false);
-  const onChange = (e: FormEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value);
-  };
+  const { value, setValue, setIsFocus, isFocus, onChange } = useFocusInput();
+  const { addHistory } = useHistory();
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (value) {
       setValue('');
+      const date = new Date().toJSON();
+      addHistory({ date, name: value });
       navigate(`/search?beer_name=${value}`);
     }
   };
   const debounceValue = useDebounce(value, 500);
-  const setValueDefault = () => {
-    setValue('');
-  };
   return (
     <div>
       <div className={s.search}>
@@ -38,7 +36,7 @@ export const SearchBar = () => {
         </form>
       </div>
       {isFocus && value && (
-        <Suggest setValueDefault={setValueDefault} value={debounceValue} />
+        <Suggest setValueDefault={() => setValue('')} value={debounceValue} />
       )}
     </div>
   );

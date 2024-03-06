@@ -7,13 +7,12 @@ interface Props {
   children: React.ReactNode;
 }
 
-const ProtectedRoute = ({ children }: Props) => {
+const ProtectedRouteAuth = ({ children }: Props) => {
   const isAuth = useAppSelector(getIsAuth);
-  if (!isAuth) {
-    return <Navigate to="/signin" replace />;
+  if (isAuth) {
+    return <Navigate to="/" replace />;
   }
-
   return <div>{children}</div>;
 };
 
-export default ProtectedRoute;
+export default ProtectedRouteAuth;
