@@ -1,5 +1,6 @@
 import { Button } from 'components/ui/Button/Button';
 import { NavLink } from 'react-router-dom';
+import PropTypes, { number, string } from 'prop-types';
 import s from './BeerCard.module.scss';
 import { TransformedBeer } from '../../types/Beer';
 import { Loader } from '../ui/Loader/Loader';
@@ -35,18 +36,27 @@ export const BeerCard = ({
         <NavLink to={`/beer/${id}`}>Details</NavLink>
         {isAuth && (
           <div>
-            {isFavorite ? (
-              <Button onClick={() => toggleFavorite(beer)}>
-                Remove from favourites
-              </Button>
-            ) : (
-              <Button onClick={() => toggleFavorite(beer)}>
-                Add To Favourites
-              </Button>
-            )}
+            <Button onClick={() => toggleFavorite(beer)}>
+              {isFavorite ? (
+                <p>Remove from favourites</p>
+              ) : (
+                <p>Add To Favourites</p>
+              )}
+            </Button>
           </div>
         )}
       </div>
     </div>
   );
+};
+BeerCard.propTypes = {
+  beer: PropTypes.shape({
+    name: string,
+    description: string,
+    imageUrl: string,
+    id: number,
+  }).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  toggleFavorite: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
 };

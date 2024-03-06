@@ -8,6 +8,8 @@ import { Button } from '../ui/Button/Button';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { getIsAuth } from '../../redux-toolkit/selectors/getIsAuth';
 import { useAuthActions } from '../../hooks/useAuthActions';
+import { ThemeSwitcher } from '../ThemeSwitcher';
+import { useTheme } from '../../hooks/useTheme';
 
 export const NavBar = () => {
   const dispatch = useAppDispatch();
@@ -15,17 +17,19 @@ export const NavBar = () => {
   const { toggleAuth } = isAuth.actions;
   const navigate = useNavigate();
   const { logout } = useAuthActions();
+  const { theme } = useTheme();
   const handleLogout = useCallback(() => {
     logout();
     navigate('/');
     dispatch(toggleAuth(false));
   }, [dispatch, logout, navigate, toggleAuth]);
   return (
-    <header className={s.navbar}>
+    <header className={[s.navbar, s[theme]].join(' ')}>
       <div className={s.navbar__links}>
         <NavLink to="/">
           <img className={s.logo} src={logo} alt="beer-logo" />
         </NavLink>
+        <ThemeSwitcher />
         <div className={s.searchWidget}>
           <SearchBar />
         </div>
