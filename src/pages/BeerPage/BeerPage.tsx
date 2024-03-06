@@ -3,7 +3,7 @@ import { beerApi } from '../../redux-toolkit/services/BeerService';
 import s from './BeerPage.module.scss';
 import { Loader } from '../../components/ui/Loader/Loader';
 
-export const BeerPage = () => {
+const BeerPage = () => {
   const params = useParams();
   const {
     data: beer,
@@ -24,3 +24,5 @@ export const BeerPage = () => {
     </div>
   );
 };
+
+export default BeerPage;
