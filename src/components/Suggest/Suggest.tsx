@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import s from './Suggest.module.scss';
 import { beerApi } from '../../redux-toolkit/services/BeerService';
 import { Loader } from '../ui/Loader/Loader';
@@ -44,4 +45,8 @@ export const Suggest = ({ value, setValueDefault }: Props) => {
       ))}
     </div>
   );
+};
+Suggest.propTypes = {
+  value: PropTypes.string.isRequired,
+  setValueDefault: PropTypes.func.isRequired,
 };

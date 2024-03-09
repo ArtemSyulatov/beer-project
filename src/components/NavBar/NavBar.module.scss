@@ -3,9 +3,13 @@
   width: 100%;
   height: 150px;
   align-items: center;
+}
+.light {
   background-color: lightgray;
 }
-
+.dark {
+  background-color: #575757;
+}
 .navbar__links {
   padding: 10px;
   display: flex;

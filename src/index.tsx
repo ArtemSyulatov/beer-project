@@ -7,6 +7,7 @@ import { store } from 'redux-toolkit/store';
 import { Toaster } from 'react-hot-toast';
 import ErrorBoundary from './providers/ErrorBoundary/ErrorBoundary';
 import './index.scss';
+import ThemeProvider from './providers/ThemeProvider/ui/ThemeProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -15,10 +16,12 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ErrorBoundary>
-        <BrowserRouter>
-          <App />
-          <Toaster />
-        </BrowserRouter>
+        <ThemeProvider>
+          <BrowserRouter>
+            <App />
+            <Toaster />
+          </BrowserRouter>
+        </ThemeProvider>
       </ErrorBoundary>
     </Provider>
   </React.StrictMode>,

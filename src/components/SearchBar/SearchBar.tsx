@@ -7,6 +7,7 @@ import { Suggest } from '../Suggest/Suggest';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useFocusInput } from '../../hooks/useFocusInput';
 import { useHistory } from '../../hooks/useHistory';
+import { getDate } from '../../utils/getDate';
 
 export const SearchBar = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export const SearchBar = () => {
     e.preventDefault();
     if (value) {
       setValue('');
-      const date = new Date().toJSON();
+      const date = getDate();
       addHistory({ date, name: value });
       navigate(`/search?beer_name=${value}`);
     }
