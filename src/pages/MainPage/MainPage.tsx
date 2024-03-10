@@ -21,11 +21,7 @@ const MainPage = () => {
     per_page: perPage,
     beer_name: '',
   });
-  const {
-    toggleFavorite,
-    getIsFavourite,
-    isLoading: isFavouritesLoading,
-  } = useFavorite();
+  const { toggleFavorite, getIsFavourite } = useFavorite();
   const downloadMore = () => {
     dispatch(setPerPage({ perPage: perPage + 10 }));
   };

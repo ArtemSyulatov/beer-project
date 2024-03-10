@@ -1,6 +1,7 @@
 # beer-project
 
 - API: [PunkApi](https://punkapi.com/documentation/v2)
+- [Deploy](https://beer-project-seven.vercel.app/)
 
 ## Основной функционал
 
