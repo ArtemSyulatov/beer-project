@@ -26,7 +26,7 @@
 - [x] Есть хотя бы один **кастомный хук** [useInit](src/hooks/useInit.ts) [useTheme](src/hooks/useTheme.ts) [useDebounce](src/hooks/useDebounce.ts)
 - [x] Хотя бы несколько компонентов используют **PropTypes** [BeerCard](src/components/BeerCard/BeerCard.tsx) [Suggest](src/components/Suggest/Suggest.tsx) [SearchHistoryItem](src/components/SearchHistoryItem/SearchHistoryItem.tsx)
 - [x] Поиск не должен триггерить много запросов к серверу [**debounce**](src/components/SearchBar/SearchBar.tsx)
-- [x] Есть применение [**lazy + Suspense**](src/router/routerConfig.tsx)
+- [x] Есть применение [lazy](src/router/routerConfig.tsx) + [Suspense](src/router/AppRouter.tsx)
 
 **Redux**
 
