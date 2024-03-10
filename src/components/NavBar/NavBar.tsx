@@ -10,6 +10,7 @@ import { getIsAuth } from '../../redux-toolkit/selectors/getIsAuth';
 import { useAuthActions } from '../../hooks/useAuthActions';
 import { ThemeSwitcher } from '../ThemeSwitcher';
 import { useTheme } from '../../hooks/useTheme';
+import { setSearchValue } from '../../redux-toolkit/reducers/beerSlice';
 
 export const NavBar = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +27,10 @@ export const NavBar = () => {
   return (
     <header className={[s.navbar, s[theme]].join(' ')}>
       <div className={s.navbar__links}>
-        <NavLink to="/">
+        <NavLink
+          onClick={() => dispatch(setSearchValue({ searchValue: '' }))}
+          to="/"
+        >
           <img className={s.logo} src={logo} alt="beer-logo" />
         </NavLink>
         <ThemeSwitcher />

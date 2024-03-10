@@ -7,3 +7,8 @@ export const getPerPage = createSelector(
   [beerSelector],
   (beerState) => beerState.perPage,
 );
+
+export const getSearchValue = createSelector(
+  [beerSelector],
+  (beerState) => beerState.searchValue,
+);
