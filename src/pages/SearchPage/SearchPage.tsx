@@ -8,12 +8,12 @@ import useFavorite from '../../hooks/useFavourite';
 
 const SearchPage = () => {
   const params = useQueryParams();
-  const { data: beers, isLoading: Loading } = beerApi.useGetAllBeersQuery({
+  const { data: beers, isLoading } = beerApi.useGetAllBeersQuery({
     per_page: 5,
     beer_name: params.get('beer_name'),
   });
-  const { toggleFavorite, getIsFavourite, isLoading } = useFavorite();
-  if (isLoading || Loading) {
+  const { toggleFavorite, getIsFavourite } = useFavorite();
+  if (isLoading) {
     return <Loader />;
   }
   if (beers.length === 0) {
