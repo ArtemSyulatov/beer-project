@@ -13,9 +13,9 @@ export const useInit = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(toggleAuth(true));
         const userData = { uid: user.uid, email: user.email };
         dispatch(setUser(userData));
+        dispatch(toggleAuth(true));
       } else {
         dispatch(clearUser());
       }
