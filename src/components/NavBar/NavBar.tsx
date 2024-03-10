@@ -19,6 +19,9 @@ export const NavBar = () => {
   const navigate = useNavigate();
   const { logout } = useAuthActions();
   const { theme } = useTheme();
+  const clearInput = () => {
+    dispatch(setSearchValue({ searchValue: '' }));
+  };
   const handleLogout = useCallback(() => {
     logout();
     navigate('/');
@@ -27,10 +30,7 @@ export const NavBar = () => {
   return (
     <header className={[s.navbar, s[theme]].join(' ')}>
       <div className={s.navbar__links}>
-        <NavLink
-          onClick={() => dispatch(setSearchValue({ searchValue: '' }))}
-          to="/"
-        >
+        <NavLink onClick={clearInput} to="/">
           <img className={s.logo} src={logo} alt="beer-logo" />
         </NavLink>
         <ThemeSwitcher />
@@ -41,10 +41,14 @@ export const NavBar = () => {
           {isAuthNow ? (
             <div className={s.rightSide}>
               <div>
-                <NavLink className={s.link} to="/history">
+                <NavLink onClick={clearInput} className={s.link} to="/history">
                   History
                 </NavLink>
-                <NavLink className={s.link} to="/favorites">
+                <NavLink
+                  onClick={clearInput}
+                  className={s.link}
+                  to="/favorites"
+                >
                   Favorites beers
                 </NavLink>
               </div>
