@@ -4,8 +4,9 @@ import PropTypes, { number, string } from 'prop-types';
 import s from './BeerCard.module.scss';
 import { TransformedBeer } from '../../types/Beer';
 import { Loader } from '../ui/Loader/Loader';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getIsAuth } from '../../redux-toolkit/selectors/getIsAuth';
+import { setSearchValue } from '../../redux-toolkit/reducers/beerSlice';
 
 interface Props {
   beer: TransformedBeer;
@@ -21,6 +22,7 @@ export const BeerCard = ({
   isFavorite,
 }: Props) => {
   const isAuth = useAppSelector(getIsAuth);
+  const dispatch = useAppDispatch();
   const { name, description, imageUrl, id } = beer;
   if (isLoading) {
     return <Loader />;
@@ -33,7 +35,12 @@ export const BeerCard = ({
       </p>
       <p>{description}</p>
       <div className={s.buttons}>
-        <NavLink to={`/beer/${id}`}>Details</NavLink>
+        <NavLink
+          onClick={() => dispatch(setSearchValue({ searchValue: '' }))}
+          to={`/beer/${id}`}
+        >
+          Details
+        </NavLink>
         {isAuth && (
           <div>
             <Button onClick={() => toggleFavorite(beer)}>
